@@ -8,15 +8,23 @@
 
 // }
 
-$('search-button').on('click', function() {
-    var queryURL = 'https://api.openweathermap.org/data/2.5/weather?q={city name}&appid=c602c0a5fb4280978dadc46ab1369f6a';
+var historyArr = [];
+$('#history').append(historyArr);
 
-    fetch(queryURL)
-        .then(function (response) {
-            return response.json();
-        })
-        then(function (results) {
-            var results = results.data;
-            console.log('results');
-        })
+function renderButtons() {
+    for (var i = 0; i < historyArr.length; i++) {
+        var btn = $('<button>');
+        btn.adddClass('button')
+        btn.attr('data-name', historyArr[i]);
+        btn.text(historyArr[i]);
+        $('#history').append(btn);
+    }
+}
+$('#search-button').on('click', function() {
+    // var queryURL = 'https://api.openweathermap.org/data/2.5/weather?q={city name}&appid=c602c0a5fb4280978dadc46ab1369f6a';
+    var city = $('#search-input').val().trim();
+    historyArr.push(city);
+    renderButtons();
+
 })
+renderButtons();
