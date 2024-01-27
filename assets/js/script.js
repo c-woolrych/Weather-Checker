@@ -8,23 +8,18 @@
 
 // }
 
-var historyArr = [];
-$('#history').append(historyArr);
 
-function renderButtons() {
-    for (var i = 0; i < historyArr.length; i++) {
-        var btn = $('<button>');
-        btn.adddClass('button')
-        btn.attr('data-name', historyArr[i]);
-        btn.text(historyArr[i]);
-        $('#history').append(btn);
-    }
-}
-$('#search-button').on('click', function() {
-    // var queryURL = 'https://api.openweathermap.org/data/2.5/weather?q={city name}&appid=c602c0a5fb4280978dadc46ab1369f6a';
+
+$('#search-button').on('click', function(event) {
+    event.preventDefault();
     var city = $('#search-input').val().trim();
-    historyArr.push(city);
-    renderButtons();
-
+    renderButtons(city);
+    
 })
-renderButtons();
+
+function renderButtons(city) {
+        var btn = $('<button>');
+        btn.addClass('btn');
+        btn.text(city);
+        $('#history').append(btn);
+}
