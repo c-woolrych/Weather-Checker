@@ -7,12 +7,12 @@
 //     queryParams.q = $('#search-input').val().trim();
 
 // }
-
-
+var city // = $('#search-input').val().trim();
+var cities = [];
 
 $('#search-button').on('click', function(event) {
     event.preventDefault();
-    var city = $('#search-input').val().trim();
+    city = $('#search-input').val().trim();
     renderButtons(city);
     
 })
@@ -22,4 +22,26 @@ function renderButtons(city) {
         btn.addClass('btn');
         btn.text(city);
         $('#history').append(btn);
+        localStorage.setItem('cities', JSON.stringify(cities));
 }
+console.log(cities);
+
+$('#search-input').each(function () {
+    cities.push($(this).val());
+});
+
+function loadButtons() {
+    const storedButtons = localStorage.getItem('cities');
+
+    if (storedButtons) {
+        const parsedButtons = JSON.parse(storedButtons);
+
+        parsedButtons.forEach((city) => {
+            var btn = $('<button>');
+            btn.addClass('btn');
+            btn.text(city);
+            $('#history').append(btn);
+        });
+    }
+}
+window.addEventListener('load', loadButtons);
