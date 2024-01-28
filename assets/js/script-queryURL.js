@@ -8,20 +8,27 @@ $('#search-button').on('click', function() {
             return response.json();
         })
         .then(function (data) {
-            var results = results.data;
+    // todayEl.empty();
 
-            for (var i = 0; i < results.lengthl; i++) {
-                var weatherHrEl = $('.weather-hr');
+                var todayEl = $('#today');
+                todayEl.append(cardTitleEl);
+                todayEl.append(cardTextEl);
 
-                var temp = results[i].main.temp.val();
-                var wind = results.wind.speed.val();
-                var humid = results.main.humidity.val();
-                var tempP = $('<p>').text('Temperature: ' + temp + 'C');
-                var windP = $('<p>').text('Wind: ' + wind + 'KPH');
-                var humidP = $('<p>').text('Humidity: ' + humid + '%');
+                var cardTitleEl = $('#card-title');
+                var cardTextEl = $('#card-text');
 
-
-            }
+                var cityName = data.name;
+                var temp = data.main.temp;
+                var wind = data.wind.speed;
+                var humid = data.main.humidity;
+                var cityNameP = cardTitleEl.text(cityName);
+                var tempP = $('#card-text-temp').text('Temperature: ' + temp + 'C');
+                var windP = $('#card-text-wind').text('Wind: ' + wind + 'KPH');
+                var humidP = $('#card-text-humid').text('Humidity: ' + humid + '%');
+                cardTitleEl.append(cityNameP);
+                cardTextEl.append(tempP);
+                cardTextEl.append(windP);
+                cardTextEl.append(humidP);
         });
     })
 
