@@ -1,12 +1,14 @@
 var cityHistory = $('#history');
+var searchBtnEl = $('#search-button');
+var cityInput = $('#search-input')
 var cityArr = [];
 
-
 //event listener for search button
-$('#search-button').on('click', function(event) {
+searchBtnEl.on('click', function(event) {
     event.preventDefault();
-    localStorage.setItem('city', (cityArr));
-
+    var city = cityInput.val().trim();
+    cityArr.push(city);
+    localStorage.setItem('cityInput', (cityArr));
     renderButtons();
 
 })
@@ -19,21 +21,21 @@ function renderButtons() {
         btn.addClass('btn');
         btn.addClass('btn-primary');
         cityHistory.append(btn);
-        cityArr.push(city);
 
 }
 console.log(cityArr);
+localStorage.setItem('cityArr', (cityArr));
 
 
 window.addEventListener('load', function(event) {
-    event.preventDefault();
+    // event.preventDefault();
+    localStorage.getItem('cityArr');
     for (let i = 0; i < cityArr.length; i++) {
         var btn = $('<button>');
-        // btn.text(city);
         btn.attr('value', cityArr[i]);
         btn.addClass('btn');
         btn.addClass('btn-primary');
         cityHistory.append(btn);
+        renderButtons();
     }
-    localStorage.getItem('cityHistory');
 });
