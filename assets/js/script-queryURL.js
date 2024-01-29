@@ -45,10 +45,14 @@ $('#search-button').on('click', function() {
             
             for (var i = 0; i < data.list.length; i++) {
                 var time = data.list[i].dt_txt;
-                console.log(data.list[i].dt_txt);
                 
                 if (time.includes('12:00:00')) {
-
+                    var date = data.list[i].dt_txt.slice(0, 10);
+                    var temp = data.list[i].main.temp;
+                    var wind = data.list[i].wind.speed;
+                    var humid = data.list[i].main.humidity;
+                    console.log(humid);
+                    
                 }
             }
             
