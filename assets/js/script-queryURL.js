@@ -2,10 +2,10 @@
 
 $('#search-button').on('click', function() {
     var cityName = $('#search-input').val().trim();
-    var queryURL = 'https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&appid=c602c0a5fb4280978dadc46ab1369f6a';
+    var queryURLcurrent = 'https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&appid=c602c0a5fb4280978dadc46ab1369f6a';
     
     
-    fetch(queryURL)
+    fetch(queryURLcurrent)
         .then(function (response) {
             return response.json();
         })
@@ -31,6 +31,16 @@ $('#search-button').on('click', function() {
                 cardTextEl.append(windP);
                 cardTextEl.append(humidP);
         });
-    })
+    var queryURLforecast = 'api.openweathermap.org/data/2.5/forecast?q=' + cityName + '&appid=c602c0a5fb4280978dadc46ab1369f6a'
+    console.log(queryURLforecast);
+
+    fetch(queryURLforecast)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function(data) {
+            var 
+        })
+})
 
 
