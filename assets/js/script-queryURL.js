@@ -40,18 +40,26 @@ $('#search-button').on('click', function() {
         })
         .then(function(data) {
             var forecastEl = $('#forecast');
-            forecastEl.append();
+            forecastEl.append(cards);
             
             
             for (var i = 0; i < data.list.length; i++) {
                 var time = data.list[i].dt_txt;
                 
                 if (time.includes('12:00:00')) {
+                    var cards = $('<div>').addClass('card m-1').attr('width: 11rem');
                     var date = data.list[i].dt_txt.slice(0, 10);
                     var temp = data.list[i].main.temp;
                     var wind = data.list[i].wind.speed;
                     var humid = data.list[i].main.humidity;
-                    console.log(humid);
+                    var dateP = $('<h5>').text(date).addClass('fw-bold');
+                    var tempP = $('<p>').text('Temperature: ' + temp + ' C');
+                    var windP = $('<p>').text('Wind Speed: ' + wind + ' MPH');
+                    var humidP = $('<p>').text('Humidity: ' + humid + '%');
+                    cards.append(dateP);
+                    // .append(tempP).append(windP).append(humidP);
+
+                    // console.log(humid);
                     
                 }
             }
