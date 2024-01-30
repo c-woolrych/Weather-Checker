@@ -4,7 +4,7 @@ var cityInput = $('#search-input')
 var cityArr = JSON.parse(localStorage.getItem('stored')) || [];
 var clearHistory = $('#clear-button');
 
-//clear history event listener
+//clear history 
 $('#clear-button').on('click', function() {
     cityArr = [];
     localStorage.clear();

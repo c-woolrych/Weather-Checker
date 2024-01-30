@@ -84,10 +84,12 @@ function currentWeather(cityName) {
 
 // click event to fetch weather data of city searched
 searchBtnEl.on('click', function(event) {
+    // event.preventDefault();
+    // $('#forecastDiv').empty();
+
 var cityName = cityInput.val().trim();
 currentWeather(cityName);
 forecast(cityName);
 });
-
 
 
