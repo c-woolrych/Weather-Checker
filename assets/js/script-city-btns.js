@@ -8,11 +8,20 @@ searchBtnEl.on('click', function(event) {
     event.preventDefault();
     var city = cityInput.val().trim();
     cityArr.push(city);
-    localStorage.setItem('cityInput', (cityArr));
+    localStorage.setItem('stored', (cityArr));
     renderButtons();
-
 })
 
+var stored = localStorage.getItem('stored', (cityArr));
+function getStored() {
+
+    for (let i = 0; i < stored.length; i++) {
+        var cityBtn = $('<button>').attr('class', 'list-group-item').text(stored);
+        cityHistory.append(cityBtn);
+        console.log(stored);
+    }
+}
+getStored()
 // creates buttons of cities
 function renderButtons() {
         var city = $('#search-input').val().trim();
@@ -23,19 +32,3 @@ function renderButtons() {
         cityHistory.append(btn);
 
 }
-console.log(cityArr);
-localStorage.setItem('cityArr', (cityArr));
-
-
-window.addEventListener('load', function(event) {
-    // event.preventDefault();
-    localStorage.getItem('cityArr');
-    for (let i = 0; i < cityArr.length; i++) {
-        var btn = $('<button>');
-        btn.attr('value', cityArr[i]);
-        btn.addClass('btn');
-        btn.addClass('btn-primary');
-        cityHistory.append(btn);
-        renderButtons();
-    }
-});

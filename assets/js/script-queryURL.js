@@ -64,7 +64,7 @@ $('#search-button').on('click', function(event) {
 
                 if (time.includes('09:00:00')) {
                     var iconURL = $('<img>').attr('src', 'https://openweathermap.org/img/wn/' + data.list[i].weather[0].icon + '@2x.png');
-                    console.log(data.list[i].weather[0].icon);
+                    // console.log(data.list[i].weather[0].icon);
                     var date = data.list[i].dt_txt.slice(0, 10);
                     var temp = data.list[i].main.temp;
                     var wind = data.list[i].wind.speed;
