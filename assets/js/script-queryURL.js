@@ -9,11 +9,9 @@
 //     event.preventDefault();
 //     todayDate.clear();
 // });
-var cityName = cityInput.val().trim();
 
-    //query for current weather
-    function currentWeather() {
-        var cityName = $('#search-input').val().trim();
+//query for current weather
+function currentWeather(cityName) {
         var queryURLcurrent = 'https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&units=metric&appid=c602c0a5fb4280978dadc46ab1369f6a';
     fetch(queryURLcurrent)
     .then(function (response) {
@@ -47,8 +45,7 @@ var cityName = cityInput.val().trim();
     };
 
             //query for 5 day forecast
-            function forecast() {
-        var cityName = $('#search-input').val().trim();
+            function forecast(cityName) {
                 var queryURLforecast = 'https://api.openweathermap.org/data/2.5/forecast?q=' + cityName + '&appid=c602c0a5fb4280978dadc46ab1369f6a&units=metric'
             
                 fetch(queryURLforecast)
@@ -87,8 +84,9 @@ var cityName = cityInput.val().trim();
 
 // click event to fetch weather data of city searched
 searchBtnEl.on('click', function(event) {
-currentWeather();
-forecast()
+var cityName = cityInput.val().trim();
+currentWeather(cityName);
+forecast(cityName);
 });
 
 
