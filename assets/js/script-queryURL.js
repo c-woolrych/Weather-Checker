@@ -1,4 +1,4 @@
-// console.log(date);
+//attempt at date placeholder
 
 // var todayDate = new Date().toJSON().slice(0, 10);
 // var todayEl = $('#today');
@@ -10,10 +10,13 @@
 //     todayDate.clear();
 // });
 
+
+// click event to fetch weather data of city searched
 $('#search-button').on('click', function(event) {
     var cityName = $('#search-input').val().trim();
     var queryURLcurrent = 'https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&units=metric&appid=c602c0a5fb4280978dadc46ab1369f6a';
     
+    //query for current weather
     fetch(queryURLcurrent)
     .then(function (response) {
             return response.json();
@@ -44,6 +47,7 @@ $('#search-button').on('click', function(event) {
                 cardTextEl.append(humidP);
         });
 
+        //query for 5 day forecast
     var queryURLforecast = 'https://api.openweathermap.org/data/2.5/forecast?q=' + cityName + '&appid=c602c0a5fb4280978dadc46ab1369f6a&units=metric'
 
     fetch(queryURLforecast)
@@ -57,6 +61,7 @@ $('#search-button').on('click', function(event) {
                 var forecastSection = $('#forecast');
                 var dayDiv = $('#day');
                 forecastSection.append(dayDiv);
+
                 if (time.includes('09:00:00')) {
                     var iconURL = $('<img>').attr('src', 'https://openweathermap.org/img/wn/' + data.list[i].weather[0].icon + '@2x.png');
                     console.log(data.list[i].weather[0].icon);
