@@ -57,11 +57,10 @@ $('#search-button').on('click', function(event) {
                 var forecastSection = $('#forecast');
                 var dayDiv = $('#day');
                 forecastSection.append(dayDiv);
-                
-                if (time.includes('12:00:00')) {
+                if (time.includes('09:00:00')) {
+                    var iconURL = $('<img>').attr('src', 'https://openweathermap.org/img/wn/' + data.list[i].weather[0].icon + '@2x.png');
+                    console.log(data.list[i].weather[0].icon);
                     var date = data.list[i].dt_txt.slice(0, 10);
-                    var icon = data.list[0].weather.icon;
-                    console.log(icon);
                     var temp = data.list[i].main.temp;
                     var wind = data.list[i].wind.speed;
                     var humid = data.list[i].main.humidity;
@@ -71,6 +70,7 @@ $('#search-button').on('click', function(event) {
                     var humidP = $('<p>').text('Humidity: ' + humid + '%');
                     
                     dayDiv.append(dateP)
+                    .append(iconURL)
                     .append(tempP).append(windP).append(humidP);
                 }
             }
