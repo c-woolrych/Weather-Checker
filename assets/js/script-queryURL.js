@@ -39,15 +39,14 @@ $('#search-button').on('click', function() {
             return response.json();
         })
         .then(function(data) {
-            var forecastEl = $('#forecast');
-            forecastEl.append(cards);
             
-            
-            for (var i = 0; i < data.list.length; i++) {
+            for (var i = 0; i < data.list.length -1; i++) {
                 var time = data.list[i].dt_txt;
+                var forecastSection = $('#forecast');
+                var dayDiv = $('#day');
+                forecastSection.append(dayDiv);
                 
                 if (time.includes('12:00:00')) {
-                    var cards = $('<div>').addClass('card m-1').attr('width: 11rem');
                     var date = data.list[i].dt_txt.slice(0, 10);
                     var temp = data.list[i].main.temp;
                     var wind = data.list[i].wind.speed;
@@ -56,15 +55,13 @@ $('#search-button').on('click', function() {
                     var tempP = $('<p>').text('Temperature: ' + temp + ' C');
                     var windP = $('<p>').text('Wind Speed: ' + wind + ' MPH');
                     var humidP = $('<p>').text('Humidity: ' + humid + '%');
-                    cards.append(dateP);
-                    // .append(tempP).append(windP).append(humidP);
-
-                    // console.log(humid);
                     
+                    dayDiv.append(dateP)
+                    .append(tempP).append(windP).append(humidP);
                 }
             }
             
-
+            
         })
 })
 
