@@ -1,12 +1,21 @@
 // console.log(date);
 
-$('#search-button').on('click', function() {
+// var todayDate = new Date().toJSON().slice(0, 10);
+// var todayEl = $('#today');
+// window.addEventListener('load', function() {
+//     todayEl.append($('<h3>').text(todayDate));
+// });
+// $('#search-button').on('click', function(event) {
+//     event.preventDefault();
+//     todayDate.clear();
+// });
+
+$('#search-button').on('click', function(event) {
     var cityName = $('#search-input').val().trim();
     var queryURLcurrent = 'https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&units=metric&appid=c602c0a5fb4280978dadc46ab1369f6a';
     
-    
     fetch(queryURLcurrent)
-        .then(function (response) {
+    .then(function (response) {
             return response.json();
         })
         .then(function (data) {
@@ -19,6 +28,8 @@ $('#search-button').on('click', function() {
                 var cardTextEl = $('#card-text');
 
                 var cityName = data.name;
+                var icon = data.weather[0].icon;
+                var iconURL = $('<img>').attr('src', 'https://openweathermap.org/img/wn/' + icon +'@2x.png');
                 var temp = data.main.temp;
                 var wind = data.wind.speed;
                 var humid = data.main.humidity;
@@ -27,6 +38,7 @@ $('#search-button').on('click', function() {
                 var windP = $('#card-text-wind').text('Wind: ' + wind + ' KPH');
                 var humidP = $('#card-text-humid').text('Humidity: ' + humid + '%');
                 cardTitleEl.append(cityNameP);
+                cardTitleEl.append(iconURL);
                 cardTextEl.append(tempP);
                 cardTextEl.append(windP);
                 cardTextEl.append(humidP);
@@ -48,6 +60,8 @@ $('#search-button').on('click', function() {
                 
                 if (time.includes('12:00:00')) {
                     var date = data.list[i].dt_txt.slice(0, 10);
+                    var icon = data.list[0].weather.icon;
+                    console.log(icon);
                     var temp = data.list[i].main.temp;
                     var wind = data.list[i].wind.speed;
                     var humid = data.list[i].main.humidity;
