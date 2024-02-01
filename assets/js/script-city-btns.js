@@ -1,5 +1,5 @@
 var cityHistory = $('#history');
-var searchBtnEl = $('#search-button');
+// var searchBtnEl = $('#search-button');
 var cityInput = $('#search-input')
 var cityArr = JSON.parse(localStorage.getItem('stored')) || [];
 var clearHistory = $('#clear-button');
@@ -21,6 +21,17 @@ searchBtnEl.on('click', function(event) {
     renderButtons();
 })
 
+// creates buttons of cities
+function renderButtons() {
+    var city = $('#search-input').val().trim();
+    var btn = $('<button>');
+    btn.text(city);
+    btn.addClass('btn');
+    cityHistory.append(btn);
+}
+
+
+
 var stored = JSON.parse(localStorage.getItem('stored'));
 function getStored() {
 
@@ -30,7 +41,8 @@ function getStored() {
         // console.log(stored);
 
 cityBtn.on('click', function(event) {
-    var cityName = $(this).text;
+    var cityName = event.target.textContent;
+    console.log(cityName);
     currentWeather(cityName);
     //cityname === the button that was clicked
     // $(this)
@@ -39,13 +51,3 @@ cityBtn.on('click', function(event) {
 }
 }
 getStored()
-
-
-// creates buttons of cities
-function renderButtons() {
-    var city = $('#search-input').val().trim();
-    var btn = $('<button>');
-    btn.text(city);
-    btn.addClass('btn');
-    cityHistory.append(btn);
-}
