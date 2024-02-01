@@ -30,8 +30,7 @@ function renderButtons() {
     cityHistory.append(btn);
 }
 
-
-
+// use stored city names to render buttons with
 var stored = JSON.parse(localStorage.getItem('stored'));
 function getStored() {
 
@@ -40,14 +39,15 @@ function getStored() {
         cityHistory.append(cityBtn);
         // console.log(stored);
 
-cityBtn.on('click', function(event) {
-    var cityName = event.target.textContent;
-    console.log(cityName);
-    currentWeather(cityName);
-    //cityname === the button that was clicked
-    // $(this)
-    forecast(cityName);
-})
-}
+        // when city buttons clicked the current weather and forecsat is brought back up
+        cityBtn.on('click', function(event) {
+            forecastCard.remove();
+            
+            var cityName = event.target.textContent;
+            // console.log(cityName);
+            currentWeather(cityName);
+            forecast(cityName);
+        })
+    }
 }
 getStored()

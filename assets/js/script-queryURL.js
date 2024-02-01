@@ -1,6 +1,8 @@
 
 var searchBtnEl = $('#search-button');
 
+var forecastCard = $('<div>');
+
 //query for current weather
 function currentWeather(cityName) {
     var queryURLcurrent = 'https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&units=metric&appid=c602c0a5fb4280978dadc46ab1369f6a';
@@ -46,21 +48,19 @@ function forecast(cityName) {
     })
     .then(function(data) {
         
-        var forecastCard = $('.forecastCard');
-        console.log(forecastCard);
-        forecastCard.each(function(card) {
-            $(card).remove();
-        })
-
+        // var forecastCard = $('.forecastCard');
+        // console.log(forecastCard);
+        // forecastCard.each(function(card) {
+        //     $(card).remove();
+        // })
         for (var i = 0; i < data.list.length -1; i++) { 
 
             var time = data.list[i].dt_txt;
             var forecastSection = $('#forecast');
-            var dayDiv = $('#day' + (i+1));
-            forecastSection.append(dayDiv);
+            forecastSection.append(forecastCard);
             
             if (time.includes('12:00:00')) {
-                // $('#forecast').clear();
+                forecastCard = $('<div>').addClass('card forecastCard m-1').attr('style', 'width: 11rem')
                 var iconURL = $('<img>').attr('src', 'https://openweathermap.org/img/wn/' + data.list[i].weather[0].icon + '@2x.png');
                 // console.log(data.list[i].weather[0].icon);
                 var date = data.list[i].dt_txt.slice(0, 10);
@@ -72,22 +72,16 @@ function forecast(cityName) {
                 var windP = $('<p>').text('Wind Speed: ' + wind + ' MPH');
                 var humidP = $('<p>').text('Humidity: ' + humid + '%');
             
-                dayDiv.append(dateP)
+                forecastCard.append(dateP)
                 .append(iconURL)
                 .append(tempP).append(windP).append(humidP);
-            }
-        }
+            };
+        };
     });
 };
 
 // click event to fetch weather data of city searched
 searchBtnEl.on('click', function(event) {
-    // event.preventDefault();
-    // $('#day').removeText();
-    // $('#forecast').clear();
-    // $('#day').empty();
-    // $('#day').html('');
-
 
 var cityName = cityInput.val().trim();
 currentWeather(cityName);
