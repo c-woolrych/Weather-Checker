@@ -1,7 +1,7 @@
 
 var searchBtnEl = $('#search-button');
 
-var forecastCard = $('<div>');
+var forecastCard = $('.forecastCard');
 
 //query for current weather
 function currentWeather(cityName) {
@@ -47,12 +47,11 @@ function forecast(cityName) {
         return response.json();
     })
     .then(function(data) {
-        
-        // var forecastCard = $('.forecastCard');
-        // console.log(forecastCard);
-        // forecastCard.each(function(card) {
-        //     $(card).remove();
-        // })
+        $('#forecast').empty();
+        var forecastCard = $('.forecastCard');
+        console.log(forecastCard);
+        forecastCard.each(function(card) {
+        })
         for (var i = 0; i < data.list.length -1; i++) { 
 
             var time = data.list[i].dt_txt;
@@ -60,6 +59,7 @@ function forecast(cityName) {
             forecastSection.append(forecastCard);
             
             if (time.includes('12:00:00')) {
+                
                 forecastCard = $('<div>').addClass('card forecastCard m-1').attr('style', 'width: 11rem')
                 var iconURL = $('<img>').attr('src', 'https://openweathermap.org/img/wn/' + data.list[i].weather[0].icon + '@2x.png');
                 // console.log(data.list[i].weather[0].icon);

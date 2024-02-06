@@ -41,7 +41,7 @@ function getStored() {
 
         // when city buttons clicked the current weather and forecsat is brought back up
         cityBtn.on('click', function(event) {
-            forecastCard.remove();
+            forecastCard.remove();  // remove function goes here ????
             
             var cityName = event.target.textContent;
             // console.log(cityName);
